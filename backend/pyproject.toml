@@ -1,0 +1,20 @@
+[project]
+name = "mock-s3-api"
+version = "0.1.0"
+description = "FastAPI API with mock S3 data"
+requires-python = ">=3.11"
+
+dependencies = [
+  "fastapi",
+  "uvicorn[standard]"
+]
+
+[tool.ruff]
+select = ["E", "F", "W"]
+
+[tool.black]
+line-length = 88
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
