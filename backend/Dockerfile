@@ -3,6 +3,8 @@ FROM python:3.11-slim AS base
 ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
 
+ENV PATH="/root/.local/bin:/root/.cargo/bin:$PATH"
+
 WORKDIR /app
 
 RUN apt-get update \
