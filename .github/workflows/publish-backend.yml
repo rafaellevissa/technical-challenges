@@ -30,7 +30,7 @@ jobs:
 
       - name: Lint (ruff)
         working-directory: backend
-        run: uv run ruff app
+        run: uv run ruff check app
 
       - name: Format check (black)
         working-directory: backend
@@ -38,5 +38,5 @@ jobs:
 
       - name: Run tests
         working-directory: backend
-        run: uv run pytest
+        run: PYTHONPATH=. uv run pytest
 
