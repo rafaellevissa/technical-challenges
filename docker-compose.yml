@@ -1,6 +1,20 @@
 services:
-  backend:
-    build:
+  localstack:
+    container_name: localstack_main
+    image: localstack/localstack-pro:latest
+    ports:
+      - "4566:4566"
+      - "4510-4559:4510-4559"
+    environment:
+      - DEBUG=1
+      - LOCALSTACK_AUTH_TOKEN=${LOCALSTACK_AUTH_TOKEN}
+      - DOCKER_HOST=unix:///var/run/docker.sock
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock"
+      - "./localstack_data:/var/lib/localstack"
+
+  backend: 
+    build: 
       context: ./backend
     container_name: mock-backend
     ports:
