@@ -38,6 +38,24 @@ jobs:
         env:
           LOCALSTACK_AUTH_TOKEN: ${{ secrets.LOCALSTACK_AUTH_TOKEN }}
 
+      - name: Install kind
+        run: |
+          curl -Lo ./kind https://kind.sigs.k8s.io/dl/v0.23.0/kind-linux-amd64
+          chmod +x ./kind
+          sudo mv ./kind /usr/local/bin/kind
+
+      - name: Create kind cluster
+        run: |
+          kind create cluster --name localstack-k8s
+          kubectl cluster-info
+
+      - name: Export KUBE_CONFIG_PATH
+        run: |
+          echo "KUBE_CONFIG_PATH=$HOME/.kube/config" >> $GITHUB_ENV
+
+      - name: Validate Kubernetes
+        run: kubectl get nodes
+
       - name: Terraform Init
         run: terraform init
         working-directory: ./infrastructure
@@ -79,6 +97,24 @@ jobs:
           localstack wait -t 60
         env:
           LOCALSTACK_AUTH_TOKEN: ${{ secrets.LOCALSTACK_AUTH_TOKEN }}
+
+      - name: Install kind
+        run: |
+          curl -Lo ./kind https://kind.sigs.k8s.io/dl/v0.23.0/kind-linux-amd64
+          chmod +x ./kind
+          sudo mv ./kind /usr/local/bin/kind
+
+      - name: Create kind cluster
+        run: |
+          kind create cluster --name localstack-k8s
+          kubectl cluster-info
+
+      - name: Export KUBE_CONFIG_PATH
+        run: |
+          echo "KUBE_CONFIG_PATH=$HOME/.kube/config" >> $GITHUB_ENV
+
+      - name: Validate Kubernetes
+        run: kubectl get nodes
 
       - name: Terraform Init
         run: terraform init
