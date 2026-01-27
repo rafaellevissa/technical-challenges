@@ -4,6 +4,8 @@ Este repositório contém o código Terraform para provisionar uma infraestrutur
 
 ## Estrutura do Projeto
 
+![Diagrama](./diagrama.png)
+
 Todo o código Terraform está localizado dentro do diretório `/infrastructure`.
 
 ```text
@@ -99,4 +101,10 @@ Para migrar para a nuvem real, siga estes passos:
 ```bash
 export AWS_PROFILE=seu-perfil-aws
 terraform apply
+```
+
+Se der algum problema de conectividade com o kubernetes:
+
+```
+export KUBE_CONFIG_PATH=/path/to/kubeconfig
 ```
